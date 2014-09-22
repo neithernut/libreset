@@ -204,4 +204,27 @@
 
         We may now define thresholds for the fraction of buckets in the first
         and the last categories, which will trigger a resize if exceeded.
+        Those thresholds should optimize the amount of buckets with optimal
+        width.
+
+        To do this, we will assume that the distribution of elements is
+        ``reasonable'' to some extend, meaning that only a few buckets have
+        heights $<h_{opt}-1$ or $>h_{opt}+1$.
+        Since a difference of the height of an AVL of $1$ means double or half
+        the nodes, this should be a reasonable assumption.
+
+        Now consider a constellation where a $a$ of the buckets have a height
+        of $h_{opt}-1$.
+        Merging them in pairs would result in half the number of buckets with a
+        height of $h_{opt}$.
+        Merging in pairs the buckets with ideal height would, of course, also
+        result in half the number of buckets, with a greater height.
+        Splitting buckets into a pair has the opposite effect:
+        the number of buckets is doubled, while the height is decreased by one.
+
+        Of course, this is a very simple model (e.g. buckets of different
+        heights may be paired up), but it may serve as a base for a view on
+        resizes.
+        For example, it tells us that basing the resizing on the categories
+        described above goes well with the factor of two.
 
