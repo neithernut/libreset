@@ -201,6 +201,8 @@ int
 avl_union(
     struct avl* dest, //!< destination of the union merge
     struct avl const* src, //!< AVL to merge into the destination
+    r_hash min_hash, //!< lowest key for nodes to merge
+    r_hash max_hash, //!< greatest key for nodes to merge
     struct r_set_cfg const* cfg //!< type information proveded by the user
 )
 __r_nonnull__(1, 2)

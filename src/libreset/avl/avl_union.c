@@ -43,9 +43,12 @@ int
 avl_union(
     struct avl* dest,
     struct avl const* src,
+    r_hash min_hash,
+    r_hash max_hash,
     struct r_set_cfg const* cfg
 ) {
-    int retval = merge_trees(&dest->root, src->root, dest, cfg);
+    int retval;
+    retval = merge_trees(&dest->root, src->root, dest, min_hash, max_hash, cfg);
     dest->root = rebalance_subtree(dest->root);
     return retval;
 }
